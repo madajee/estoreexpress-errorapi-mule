@@ -1,0 +1,13 @@
+#%RAML 1.0
+title: estoreexpress-errorapi-mule
+
+/ping:
+  get:
+    description: ping
+    responses:
+      200:
+        body:
+          application/json:
+            type: object
+            examples:
+              example1: !include examples/test1.raml
