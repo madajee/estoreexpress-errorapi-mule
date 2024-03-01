@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:vm="http://www.mulesoft.org/schema/mule/vm"
+	xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd">
+	<apikit:config name="estoreexpress-errorapi-mule-config" api="estoreexpress-errorapi-mule.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+	<configuration-properties doc:name="Configuration properties" doc:id="0cd1bb9a-900c-4918-bbe8-a0bbdaa682a3" file="config/config-${env}.yaml" />
+	<configuration-properties doc:name="Configuration properties" doc:id="73e20f7c-b3d2-49b9-bb4e-86717ad52a71" file="config/queries-${env}.properties" />
+	<global-property doc:name="Global Property" doc:id="e27fdab1-9092-4712-8d72-6b0a0e23bf7d" name="env" value="local" />
+	<global-property doc:name="Global Property" doc:id="ecc33338-7090-4cfe-b435-c5bbe0387259" name="encryption.key" value="123" />
+	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="d610bc8f-f6a5-4f88-ba4b-7a7eca175532" file="config/config-${env}.yaml" key="${encryption.key}" >
+		<secure-properties:encrypt algorithm="Blowfish" />
+	</secure-properties:config>
+    <http:listener-config name="estoreexpress-errorapi-mule-httpListenerConfig">
+        <http:listener-connection host="${http.listener.host}" port="${http.listener.port}" />
+    </http:listener-config>
+	<db:config name="Database_Config" doc:name="Database Config" doc:id="c7fa1728-f470-4c68-8f64-9f907f4113ce" >
+		<db:generic-connection url="jdbc:postgresql://localhost:5432/estoreexpressmule" driverClassName="org.postgresql.Driver" user="mulejohn" password="${db.pwd}"/>
+	</db:config>
+</mule>

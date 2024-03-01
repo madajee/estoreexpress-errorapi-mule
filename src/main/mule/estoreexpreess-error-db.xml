@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	
+	<sub-flow name="readerror" doc:id="988e8a66-ec87-4725-a9b3-1470c513869d">
+		<db:select doc:name="Select" doc:id="a489e5e0-af58-4bd7-91a7-34e0dcee4a16" config-ref="Database_Config">
+			<db:sql ><![CDATA[${error.select}]]></db:sql>
+		</db:select>
+	</sub-flow>
+	<sub-flow name="inserterror" doc:id="c7a9b05b-2cb4-45dd-b387-f3b700b5e6bc" >
+		<db:insert doc:name="Insert" doc:id="d7ef8221-ddca-41e7-a9ac-ceabc517a11e" config-ref="Database_Config">
+			<db:sql ><![CDATA[${error.insert}]]></db:sql>
+			<db:input-parameters ><![CDATA[#[{'errorcode': payload.errorcode, 'errortype': payload.errortype, 'errormessage': payload.errormessage,  'msgtype': payload.msgtype, "created_on": now() as String {format: "y-MM-dd"}, "updated_on": now() as String {format: "y-MM-dd"}}]]]></db:input-parameters>
+		</db:insert>
+	</sub-flow>
+</mule>

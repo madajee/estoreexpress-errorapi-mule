@@ -1,0 +1,27 @@
+#%RAML 1.0 Library
+types:
+  createerror: |
+    {
+      "type": "object",
+      "$schema": "http://json-schema.org/draft-03/schema",
+      "id": "http://jsonschema.net",
+      "required": true,
+      "properties": {
+        "errorcode": {
+          "type": "string",
+          "required": true
+        },
+        "errortype": {
+          "type": "string",
+          "required": true
+        },
+        "errormessage": {
+          "type": "string",
+          "required": true
+        },
+        "msgtype": {
+          "type": "string",
+          "required": true
+        }        
+      }
+    }
