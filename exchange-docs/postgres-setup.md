@@ -10,11 +10,11 @@ export PATH=$PATH:$POSTGRES
 psql postgres -U mulejohn;
 
 \c estoreexpressmule
-CREATE TABLE errors (id serial PRIMARY KEY, errorcode VARCHAR(50) UNIQUE NOT NULL, errortype VARCHAR(50), errormessage VARCHAR (1000) NOT NULL, msgtype VARCHAR(50), created_on TIMESTAMP NOT NULL, updated_on TIMESTAMP NOT NULL);
+CREATE TABLE errors (id serial PRIMARY KEY, errorcode VARCHAR(50) UNIQUE NOT NULL, errortype VARCHAR(50), errormessage VARCHAR (1000) NOT NULL, msgtype VARCHAR(50), exceptiontype VARCHAR(50), created_on TIMESTAMP NOT NULL, updated_on TIMESTAMP NOT NULL);
 
-INSERT INTO errors(errorcode, errortype, errormessage, msgtype, created_on, updated_on) VALUES('0001', 'APPERROR:CLIENT_ALREADY_EXISTS', 'The client with ID: test1 is already registered', 'register', '2024-02-28','2024-02-28');
+INSERT INTO errors(errorcode, errortype, errormessage, msgtype, exceptiontype, created_on, updated_on) VALUES('0001', 'APPERROR:CLIENT_ALREADY_EXISTS', 'The client with ID: test1 is already registered', 'register', 'system', '2024-02-28','2024-02-28');
 
-select id, errorcode, errortype, errormessage, msgtype, created_on, updated_on from errors;
+select id, errorcode, errortype, errormessage, msgtype, exceptiontype, created_on, updated_on from errors;
 
 delete from errors where id = 1;
 

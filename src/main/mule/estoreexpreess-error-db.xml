@@ -14,7 +14,7 @@ http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/cu
 	<sub-flow name="inserterror" doc:id="c7a9b05b-2cb4-45dd-b387-f3b700b5e6bc" >
 		<db:insert doc:name="Insert" doc:id="d7ef8221-ddca-41e7-a9ac-ceabc517a11e" config-ref="Database_Config">
 			<db:sql ><![CDATA[${error.insert}]]></db:sql>
-			<db:input-parameters ><![CDATA[#[{'errorcode': payload.errorcode, 'errortype': payload.errortype, 'errormessage': payload.errormessage,  'msgtype': payload.msgtype, "created_on": now() as String {format: "y-MM-dd"}, "updated_on": now() as String {format: "y-MM-dd"}}]]]></db:input-parameters>
+			<db:input-parameters ><![CDATA[#[{'errorcode': payload.errorcode, 'errortype': payload.errortype, 'errormessage': payload.errormessage,  'msgtype': payload.msgtype, 'exceptiontype': payload.exceptiontype, "created_on": now() as String {format: "y-MM-dd"}, "updated_on": now() as String {format: "y-MM-dd"}}]]]></db:input-parameters>
 		</db:insert>
 	</sub-flow>
 </mule>
