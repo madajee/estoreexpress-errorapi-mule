@@ -135,7 +135,7 @@ output application/json
         </ee:transform>
     </flow>
     <flow name="get:\readerror:estoreexpress-errorapi-mule-config">
- 		<flow-ref doc:name="readerror" doc:id="15058d51-156b-4b64-99ca-809955d6a895" name="readerror" target="errorsdbresponse" />
+        <flow-ref doc:name="readerror" doc:id="15058d51-156b-4b64-99ca-809955d6a895" name="readerror" target="errorsdbresponse" />
         <logger level="INFO" doc:name="Logger" doc:id="8afd92cc-dd6c-40f2-abbc-4610b4825ce4" message="#[output application/json --- vars.errorsdbresponse]" />
         <ee:transform doc:name="Transform Message">
             <ee:message>
@@ -167,6 +167,24 @@ output application/json
   msgtype: "register",
   exceptiontype: 'system'
 } as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="post:\createerrorbulk:application\json:estoreexpress-errorapi-mule-config">
+       	<flow-ref doc:name="inserterrorbulk" doc:id="f23bec5d-1c1b-42e7-84ff-c3ee28c82ee5" name="inserterrorbulk" target="usersdbresponse" />
+        <logger level="INFO" doc:name="Logger" doc:id="e8d2a1aa-b8d9-40ea-a89e-076bd065fe81" message="#[output application/json --- vars.usersdbresponse]" />
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+[{
+  errorcode: "0001",
+  errortype: "APPERROR:CLIENT_ALREADY_EXISTS",
+  errormessage: "The client with ID: test1 is already registered",
+  msgtype: "register",
+  exceptiontype: 'system'
+}] as Array {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
             </ee:message>
         </ee:transform>
     </flow>
