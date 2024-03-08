@@ -47,3 +47,13 @@ DROP TABLE errors;
 CREATE TABLE errors (id serial PRIMARY KEY, errorcode VARCHAR(50) UNIQUE NOT NULL, errortype VARCHAR(50), errormessage VARCHAR (1000) NOT NULL, msgtype VARCHAR(50), exceptiontype VARCHAR(50), created_on TIMESTAMP NOT NULL, updated_on TIMESTAMP NOT NULL);
 
 INSERT INTO errors(errorcode, errortype, errormessage, msgtype, exceptiontype, created_on, updated_on) VALUES('0001', 'APPERROR:CLIENT_ALREADY_EXISTS', 'The client with ID: test1 is already registered','register', 'system', '2024-02-28', '2024-02-28');
+
+CREATE TABLE errors (id serial PRIMARY KEY, errorcode VARCHAR(50) UNIQUE NOT NULL, errortype VARCHAR(50), errormessage VARCHAR (1000) NOT NULL, msgtype VARCHAR(50), exceptiontype VARCHAR(50), created_on_utc TIMESTAMPTZ, created_on TIMESTAMP NOT NULL, updated_on TIMESTAMP NOT NULL);
+
+SHOW TIMEZONE;
+SELECT NOW();
+SET timezone = 'America/New_York';
+SET timezone = 'UTC';
+SET timezone = 'America/Los_Angeles';
+SELECT NOW();
+
