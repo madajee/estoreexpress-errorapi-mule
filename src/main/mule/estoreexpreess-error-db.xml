@@ -19,18 +19,21 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 			<ee:variables >
 				<ee:set-variable variableName="created_on" ><![CDATA[%dw 2.0
 output application/java
-type Mydate = String { format: "uuuu/MM/dd" }
 ---
-now() as String {format: "y-MM-dd"}]]></ee:set-variable>
+now() as String {format:"yyyy-MM-dd HH:mm:ss"}]]></ee:set-variable>
 				<ee:set-variable variableName="updated_on" ><![CDATA[%dw 2.0
 output application/java
 ---
-now() as String {format: "y-MM-dd"}]]></ee:set-variable>
+now() as String {format:"yyyy-MM-dd HH:mm:ss"}]]></ee:set-variable>
+				<ee:set-variable variableName="created_on_utc" ><![CDATA[%dw 2.0
+output application/java
+---
+now() as String {format:"yyyy-MM-dd HH:mm:ss"}]]></ee:set-variable>
 			</ee:variables>
 		</ee:transform>
 		<db:insert doc:name="Insert" doc:id="d7ef8221-ddca-41e7-a9ac-ceabc517a11e" config-ref="Database_Config">
 			<db:sql ><![CDATA[${error.insert}]]></db:sql>
-			<db:input-parameters ><![CDATA[#[{'errorcode': payload.errorcode, 'errortype': payload.errortype, 'errormessage': payload.errormessage,  'msgtype': payload.msgtype, 'exceptiontype': payload.exceptiontype, "created_on": vars.created_on, "updated_on": vars.updated_on}]]]></db:input-parameters>
+			<db:input-parameters ><![CDATA[#[{'errorcode': payload.errorcode, 'errortype': payload.errortype, 'errormessage': payload.errormessage,  'msgtype': payload.msgtype, 'exceptiontype': payload.exceptiontype, 'created_on': vars.created_on, 'updated_on': vars.updated_on, 'created_on_utc': vars.created_on_utc}]]]></db:input-parameters>
 		</db:insert>
 	</sub-flow>
 	<sub-flow name="inserterrorbulk" doc:id="6b8abac7-9749-4ec2-b56b-8e8417f645e3" >
@@ -40,19 +43,22 @@ now() as String {format: "y-MM-dd"}]]></ee:set-variable>
 			<ee:variables >
 				<ee:set-variable variableName="created_on" ><![CDATA[%dw 2.0
 output application/java
-type Mydate = String { format: "uuuu/MM/dd" }
 ---
-now() as String {format: "y-MM-dd"}]]></ee:set-variable>
+now() as String {format:"yyyy-MM-dd HH:mm:ss"}]]></ee:set-variable>
 				<ee:set-variable variableName="updated_on" ><![CDATA[%dw 2.0
 output application/java
 ---
-now() as String {format: "y-MM-dd"}]]></ee:set-variable>
+now() as String {format:"yyyy-MM-dd HH:mm:ss"}]]></ee:set-variable>
+				<ee:set-variable variableName="created_on_utc" ><![CDATA[%dw 2.0
+output application/java
+---
+now() as String {format:"yyyy-MM-dd HH:mm:ss"}]]></ee:set-variable>
 			</ee:variables>
 		</ee:transform>
 		<foreach doc:name="For Each" doc:id="1af8f619-e0fe-405c-8d6e-2d357a73ed44" >
 			<db:insert doc:name="Insert" doc:id="83f028dd-dcc1-4d9f-a6f2-4a7e4e75439d" config-ref="Database_Config">
 			<db:sql><![CDATA[${error.insert}]]></db:sql>
-			<db:input-parameters ><![CDATA[#[{'errorcode': payload.errorcode, 'errortype': payload.errortype, 'errormessage': payload.errormessage,  'msgtype': payload.msgtype, 'exceptiontype': payload.exceptiontype, "created_on": vars.created_on, "updated_on": vars.updated_on}]]]></db:input-parameters>
+			<db:input-parameters ><![CDATA[#[{'errorcode': payload.errorcode, 'errortype': payload.errortype, 'errormessage': payload.errormessage,  'msgtype': payload.msgtype, 'exceptiontype': payload.exceptiontype, 'created_on': vars.created_on, 'updated_on': vars.updated_on, 'created_on_utc': vars.created_on_utc}]]]></db:input-parameters>
 		</db:insert>
 		</foreach>
 	</sub-flow>
