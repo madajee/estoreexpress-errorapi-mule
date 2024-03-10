@@ -27,8 +27,9 @@ output application/java
 now() as String {format:"yyyy-MM-dd HH:mm:ss"}]]></ee:set-variable>
 				<ee:set-variable variableName="created_on_utc" ><![CDATA[%dw 2.0
 output application/java
+var utc = "UTC" as TimeZone
 ---
-(now() >> 'UTC') as DateTime as String {format:"yyyy-MM-dd HH:mm:ss"}]]></ee:set-variable>
+(now() >> utc) as DateTime as String {format:"yyyy-MM-dd HH:mm:ss"}]]></ee:set-variable>
 			</ee:variables>
 		</ee:transform>
 		<db:insert doc:name="Insert" doc:id="d7ef8221-ddca-41e7-a9ac-ceabc517a11e" config-ref="Database_Config">
@@ -51,8 +52,9 @@ output application/java
 now() as String {format:"yyyy-MM-dd HH:mm:ss"}]]></ee:set-variable>
 				<ee:set-variable variableName="created_on_utc" ><![CDATA[%dw 2.0
 output application/java
+var utc = "UTC" as TimeZone
 ---
-(now() >> 'UTC') as DateTime as String {format:"yyyy-MM-dd HH:mm:ss"}]]></ee:set-variable>
+(now() >> utc) as DateTime as String {format:"yyyy-MM-dd HH:mm:ss"}]]></ee:set-variable>
 			</ee:variables>
 		</ee:transform>
 		<foreach doc:name="For Each" doc:id="1af8f619-e0fe-405c-8d6e-2d357a73ed44" >
