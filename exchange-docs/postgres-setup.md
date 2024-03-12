@@ -57,3 +57,4 @@ SET timezone = 'UTC';
 SET timezone = 'America/Los_Angeles';
 SELECT NOW();
 
+acceptance test: utc datetime returned from the expression was inserted into the table TIMESTAMPTZ datatype 

@@ -66,3 +66,24 @@ uses:
             type: array
             examples:
               example1: !include examples/createerrorbulk.raml
+/createerrorfile:
+  post:
+    description: createerror
+    body:
+        application/json:
+          type:  apiLib.createerror
+          example: |
+            {
+              "errorcode": "0001",
+              "errortype": "APPERROR:CLIENT_ALREADY_EXISTS",
+              "errormessage": "The client with ID: test1 is already registered",
+              "msgtype": "register",
+              "exceptiontype": "system"              
+            }
+    responses:
+      200:
+        body:
+          application/json:
+            type: object
+            examples:
+              example1: !include examples/createerror.raml

@@ -1,1 +1,17 @@
 https://blog.deciphermiddleware.in/2021/12/tips-and-tricks-to-handle-datetime.html
+
+curl --location 'http://localhost:8081/api/ping'
+
+curl --location 'http://localhost:8081/api/readerror'
+
+curl --location 'http://localhost:8081/api/createerror' \
+--header 'Content-Type: application/json' \
+--data '{"errorcode":"0006","errortype":"APPERROR:CLIENT_ALREADY_EXISTS","errormessage":"The client with ID: test1 is already registered","msgtype":"register","exceptiontype":"system"}'
+
+curl --location 'http://localhost:8081/api/createerrorbulk' \
+--header 'Content-Type: application/json' \
+--data '[{"errorcode":"0001","errortype":"APPERROR:CLIENT_ALREADY_EXISTS","errormessage":"The client with ID: test1 is already registered","msgtype":"register","exceptiontype":"system"},{"errorcode":"0002","errortype":"OAUTH2-PROVIDER:INVALID_CONFIGURATION","errormessage":"The provided parameters are invalid","msgtype":"register","exceptiontype":"system"},{"errorcode":"0003","errortype":"OAUTH2-PROVIDER:INVALID_TOKEN","errormessage":"The token to revoke is invalid.","msgtype":"register","exceptiontype":"system"},{"errorcode":"0004","errortype":"OAUTH2-PROVIDER:TOKEN_UNAUTHORIZED","errormessage":"The token is invalid or there are missing or wrong fields set in the validation.","msgtype":"register","exceptiontype":"system"},{"errorcode":"0005","errortype":"OAUTH2-PROVIDER:OAUTH_SERVER_SECURITY","errormessage":"OAuth2 Provider module throws this error when is unable to identify its reason.","msgtype":"register","exceptiontype":"system"},{"errorcode":"0006","errortype":"DB:QUERY_EXECUTION","errormessage":"INSERT has more target columns than expressions","msgtype":"createerror","exceptiontype":"system"},{"errorcode":"0007","errortype":"DB:BAD_SQL_SYNTAX","errormessage":"The provided SQL query contains invalid syntax.","msgtype":"createerror","exceptiontype":"system"},{"errorcode":"0008","errortype":"DB:CANNOT_LOAD_DRIVER","errormessage":"Database Connector cannot load the JDBC driver.","msgtype":"createerror","exceptiontype":"system"},{"errorcode":"0009","errortype":"DB:CANNOT_REACH","errormessage":"Database Connector cannot establish a connection with the RDBMS.","msgtype":"createerror","exceptiontype":"system"},{"errorcode":"0010","errortype":"DB:CONNECTIVITY","errormessage":"Any of several possible connectivity issues, including poorly configured connections, lack of a database response while waiting for results or fetching rows, loss of database connection, and so on.","msgtype":"createerror","exceptiontype":"system"},{"errorcode":"0011","errortype":"DB:INVALID_DATABASE","errormessage":"The connection to the RDBMS is established but the database doesnt exist.","msgtype":"createerror","exceptiontype":"system"},{"errorcode":"0012","errortype":"DB:INVALID_CREDENTIALS","errormessage":"The database rejects the provided credentials.","msgtype":"createerror","exceptiontype":"system"},{"errorcode":"0013","errortype":"DB:RETRY_EXHAUSTED","errormessage":"All reconnection attempts failed.","msgtype":"createerror","exceptiontype":"system"}]'
+
+curl --location 'http://localhost:8081/api/createerrorfile' \
+--header 'Content-Type: application/json' \
+--data '{"errorcode":"0006","errortype":"APPERROR:CLIENT_ALREADY_EXISTS","errormessage":"The client with ID: test1 is already registered","msgtype":"register","exceptiontype":"system"}'

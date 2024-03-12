@@ -1,0 +1,2 @@
+errorcode,errortype,errormessage,msgtype,exceptiontype
+0006,APPERROR:CLIENT_ALREADY_EXISTS,The client with ID: test1 is already registered,register,system

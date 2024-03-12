@@ -4,3 +4,6 @@ http:
     port: "8081"
 db:
   pwd: "![MZUHg5iI1/SRejE33qswRA==]"
+file:
+  workingdir: "/Users/home/mulesoft/workspacejan/estoreexpress-errorapi-mule/src/main/resources/outputfiledir"
+  filename: "estoreexpress-errors.csv"
