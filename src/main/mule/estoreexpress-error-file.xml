@@ -16,4 +16,15 @@ payload]]></ee:set-payload>
 		</ee:transform>
 		<file:write doc:name="Write" doc:id="bf39edfb-68a8-495c-bbd6-8e27076cafd2" path="${file.workingdir}/${file.filename}"/>
 	</flow>
+	<flow name="estoreexpress-error-file-bulkFlow" doc:id="c8ad4600-9900-4bf2-811c-90edc50bcbbc" >
+		<ee:transform doc:name="Transform Message" doc:id="45701a39-023d-4e9f-a20a-23987b642038" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/csv header = true
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<file:write doc:name="Write" doc:id="6afe31d8-e489-472e-92a1-cc3dbeb3a019" path="${file.workingdir}/${file.bulkfilename}"/>
+	</flow>
 </mule>

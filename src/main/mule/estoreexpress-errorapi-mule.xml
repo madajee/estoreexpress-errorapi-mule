@@ -206,4 +206,22 @@ output application/json
             </ee:message>
         </ee:transform>
     </flow>
+    <flow name="post:\createerrorfilebulk:application\json:estoreexpress-errorapi-mule-config">
+        <flow-ref doc:name="estoreexpress-error-file-bulkFlow" doc:id="e798c459-560b-4dca-a9db-f3a857c41d44" name="estoreexpress-error-file-bulkFlow" target="errorfilebulkresponse" />
+        <logger level="INFO" doc:name="Logger" doc:id="26649e6a-7d2d-4501-b3d9-a34bfd42fdc0" message="#[output application/json --- vars.errorfilebulkresponse]" />
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+[{
+  errorcode: "0001",
+  errortype: "APPERROR:CLIENT_ALREADY_EXISTS",
+  errormessage: "The client with ID: test1 is already registered",
+  msgtype: "register",
+  exceptiontype: 'system'
+}] as Array {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
 </mule>

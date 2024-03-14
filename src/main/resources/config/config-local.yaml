@@ -7,3 +7,4 @@ db:
 file:
   workingdir: "/Users/home/mulesoft/workspacejan/estoreexpress-errorapi-mule/src/main/resources/outputfiledir"
   filename: "estoreexpress-errors.csv"
+  bulkfilename: "estoreexpress--bulk-errors.csv"
