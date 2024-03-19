@@ -27,4 +27,41 @@ payload]]></ee:set-payload>
 		</ee:transform>
 		<file:write doc:name="Write" doc:id="6afe31d8-e489-472e-92a1-cc3dbeb3a019" path="${file.workingdir}/${file.bulkfilename}"/>
 	</flow>
+	<flow name="estoreexpress-error-readfile-bulkFlow-forEach" doc:id="3c10df7d-c82e-497d-8cb9-7f7d07d22df0" initialState="stopped">
+		<scheduler doc:name="Scheduler" doc:id="c347fbdc-ea76-48bb-8514-4921ce4c82e9" >
+			<scheduling-strategy >
+				<fixed-frequency frequency="1" timeUnit="MINUTES"/>
+			</scheduling-strategy>
+		</scheduler>
+		<file:read doc:name="Read" doc:id="26254e80-2c75-42d6-9b77-fb08b5a05dfc" path="${file.inputworkingdir}/${file.bulkfilename}"/>
+		<ee:transform doc:name="csvToJava" doc:id="932983a3-7cd3-4f46-8aa6-a7c6be948f33" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<foreach doc:name="For Each" doc:id="36004516-302e-4ac1-b7f0-d8776e6c31a5" batchSize="3">
+			<logger level="INFO" doc:name="Logger" doc:id="37352416-1d56-44ab-9c12-30a05ff03dc1" message="#[vars.counter]" />
+			<logger level="INFO" doc:name="Logger" doc:id="c1cbdac3-2d70-4be6-bf22-6319578414f0" message="#[output application/json --- payload]" />
+		</foreach>
+	</flow>
+	<flow name="estoreexpress-error-readfile-bulkFlow-batchJob" doc:id="407f49eb-b9d2-4e5e-ab93-8437b5efce20" >
+		<scheduler doc:name="Scheduler" doc:id="35dd7383-09e9-4472-9331-0ce4fc235d9a" >
+			<scheduling-strategy >
+				<fixed-frequency frequency="1" timeUnit="MINUTES"/>
+			</scheduling-strategy>
+		</scheduler>
+		<file:read doc:name="Read" doc:id="23a1221e-359b-483e-9919-baf07d9f8a71" path="${file.inputworkingdir}/${file.bulkfilename}"/>
+		<ee:transform doc:name="csvToJava" doc:id="35715732-6002-490c-a54c-bb68165ed2a8" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="5aec74ca-ebe5-4bfd-91f6-cf5d39167271" message="#[output application/json --- payload]" />
+	</flow>
 </mule>

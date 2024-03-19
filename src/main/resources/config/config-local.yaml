@@ -6,5 +6,6 @@ db:
   pwd: "![MZUHg5iI1/SRejE33qswRA==]"
 file:
   workingdir: "/Users/home/mulesoft/workspacejan/estoreexpress-errorapi-mule/src/main/resources/outputfiledir"
+  inputworkingdir: "/Users/home/mulesoft/workspacejan/estoreexpress-errorapi-mule/src/main/resources/inputfiledir"
   filename: "estoreexpress-errors.csv"
   bulkfilename: "estoreexpress--bulk-errors.csv"
